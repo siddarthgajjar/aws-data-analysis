@@ -205,3 +205,225 @@ These measures ensure that the data used in the analysis is protected against un
 4. **Query Data**:
    - Use Amazon Athena to run queries on enriched datasets.
 ---
+
+
+
+## Project 2: Recruitment and Selection Analytics
+
+### Project Overview
+This project focuses on analyzing recruitment and selection data to improve hiring efficiency and identify key trends. Leveraging AWS services, the project aims to uncover insights such as the application-to-hire ratio across departments and the relationship between website visits and application acceptance. The analysis enables better resource allocation and targeted recruitment strategies.
+
+---
+
+### Table of Contents
+- [Project Objective](#project-objective)
+- [Dataset](#dataset)
+- [Tools and Technologies](#tools-and-technologies)
+- [Methodology](#methodology)
+  - [Data Ingestion](#data-ingestion)
+  - [Data Profiling](#data-profiling)
+  - [Data Cleaning](#data-cleaning)
+  - [ETL Pipeline Design](#etl-pipeline-design)
+  - [Descriptive Analysis](#descriptive-analysis)
+  - [Exploratory Analysis](#exploratory-analysis)
+  - [Data Enrichment](#data-enrichment)
+  - [Data Governance](#data-governance)
+  - [Data Observability](#data-observability)
+- [Results](#results)
+- [Future Improvements](#future-improvements)
+- [How to Replicate](#how-to-replicate)
+- [License](#license)
+
+---
+
+### Project Objective
+The primary goal of this project is to enhance recruitment strategies by analyzing:
+- Application-to-hire ratio by department.
+- Candidate-to-hire ratio.
+- Average employee age by department.
+- Correlations between website visits and application acceptance.
+
+---
+
+### Dataset
+- **Source**: Internal HR records.
+- **Description**: Recruitment-related datasets including employee lists, candidate lists, and applications.
+- **Partitions**:
+  - Employees List (structured, owner: HR)
+    - **EmployeeID**: Unique identifier for each employee.
+    - **Name**: Full name of the employee.
+    - **Position**: Job title or role of the employee.
+    - **Department**: Department where the employee works.
+    - **Salary**: Annual salary of the employee.
+    - **HireDate**: Date when the employee was hired.
+    - **EmploymentType**: Type of employment (e.g., Full-time, Part-time).
+    - **Gender**: Gender of the employee.
+    - **Age**: Age of the employee.
+    - **City**: City where the employee is based.
+
+  - Candidates List (structured, owner: HR)
+    - **CandidateID**: Unique identifier for each candidate.
+    - **Name**: Full name of the candidate.
+    - **Email**: Email address of the candidate.
+    - **Phone**: Contact phone number of the candidate.
+    - **PositionApplied**: Position the candidate applied for.
+    - **Department**: Department associated with the applied position.
+    - **Experience (Years)**: Years of relevant work experience.
+    - **Education**: Educational qualification of the candidate.
+    - **ApplicationDate**: Date of application submission.
+    - **Status**: Current status of the application (e.g., Under Review, Interview Scheduled, Rejected).
+  - Applications List (structured, owner: HR)
+    - **ApplicationID**: Unique identifier for each application.
+    - **CandidateName**: Full name of the candidate associated with the application.
+    - **Email**: Email address of the candidate.
+    - **Phone**: Contact phone number of the candidate.
+    - **PositionApplied**: Position the candidate applied for.
+    - **Department**: Department associated with the applied position.
+    - **Experience (Years)**: Years of relevant work experience.
+    - **Education**: Educational qualification of the candidate.
+    - **ApplicationDate**: Date of application submission.
+    - **Status**: Current status of the application (e.g., Under Review, Interview Scheduled, Rejected).
+
+- **Key Attributes**:
+  - Employee and candidate details.
+  - Application statuses and demographics.
+  - Partitioned by ingestion year and month for efficiency.
+
+---
+
+### Tools and Technologies
+This project leveraged the following AWS services:
+- **Amazon S3**: Centralized storage for raw and processed datasets.
+- **AWS Glue**: ETL processes for dataset preparation.
+- **Amazon Athena**: Querying datasets and calculating metrics.
+- **Amazon CloudWatch**: Monitoring and observability for processes.
+- **AWS CloudTrail**: Activity logging for enhanced security.
+
+
+![Tools Overview](/images/dap_design_project2.png)
+
+---
+
+### Methodology
+
+#### Data Ingestion
+- Structured datasets uploaded to Amazon S3.
+- Organized using folder partitioning by ingestion date and scope.
+
+![Data Ingestion Process](/images/Dataingestion2.png)
+
+#### Data Profiling
+- Used AWS Glue DataBrew to:
+  - Examine dataset quality and consistency.
+  - Identify missing or erroneous values.
+
+![Data Profiling Process](/images/DataProfileP2.png)
+![Data Profiling Process](/images/DataProfilingP2.jpg)
+![Data Profiling Process](/images/DataProfile1P2.png.png)
+![Data Profiling Process](/images/DataProfile2P2.png.png)
+
+
+#### Data Cleaning
+- Removed unnecessary fields.
+- Handled missing values using imputation techniques.
+- Standardized field formats for uniformity.
+
+![Data Cleaning Process](/images/DataCleaningJobP2.png)
+![Data Cleaning Process](/images/DataCleaningTRFP2.png)
+
+
+
+#### ETL Pipeline Design
+- Visual pipelines created using AWS Glue to automate:
+  - Aggregation of metrics like application-to-hire and candidate-to-hire ratios.
+  - Segmentation of data for department-wise analysis.
+
+![Data ETL Pipeline Process](/images/etl_p2_1.png)
+![Data ETL Pipeline Process](/images/etl_p2_2.png)
+![Data ETL Pipeline Process](/images/etl_p2_3.png)
+
+
+#### Descriptive Analysis
+- Calculated:
+  - Application-to-Hire Ratio: `(Total Hires / Total Applications) * 100`
+  - Candidate-to-Hire Ratio: `(Total Hires / Total Candidates) * 100`
+  - Average Employee Age by Department.
+
+#### Exploratory Analysis
+- Investigated the relationship between webpage visits and application acceptance rates.
+- Derived correlations for each application ID.
+
+![Data Exploratory Analysis Process](/images/exp_click_stream.png)
+
+![Data Exploratory Analysis Process](/images/etl_click_stream_p2.png)
+
+![Data Exploratory Analysis Process](/images/etl_click_stream_result.png)
+
+
+
+#### Data Enrichment
+- Cataloged datasets with metadata using AWS Glue Crawlers.
+- Generated enriched datasets for querying in Amazon Athena.
+
+![Data Enrichment Process](/images/data_enc_p2_1.png)
+![Data Enrichment Process](/images/data_enc_p2_2.png)
+![Data Enrichment Process](/images/data_enc_p2_3.png)
+![Data Enrichment Process](/images/data_enc_p2_4.png)
+![Data Enrichment Process](/images/data_enc_p2_5.png)
+
+
+#### Data Governance
+- Monitored sensitive data and ensured compliance with internal policies.
+- Applied quality control rules to validate data integrity.
+
+![Data Governance Process](/images/data_gov_p2_1.png)
+
+#### Data Observability
+- Deployed a CloudWatch dashboard to track:
+  - Data pipeline execution metrics.
+  - S3 bucket utilization.
+  - Recruitment cost analysis.
+- Utilized CloudTrail for auditing changes and security.
+
+![Data Observability Process](/images/cloud_trail_p2.png)
+![Data Observability Process](/images/dashboard_p2.png)
+
+---
+
+### Results
+- **Key Findings**:
+  - Identified departments with the highest and lowest application-to-hire ratios.
+  - Established meaningful relationships between website visits and application success.
+  - Highlighted demographic trends, such as age distribution by department.
+- **Visualizations**:
+  - Department-wise application metrics.
+  - Correlation heatmaps for exploratory insights.
+
+---
+
+### Future Improvements
+- Automate updates to the dashboard with real-time data using AWS Lambda.
+- Implement role-based access control with IAM policies.
+- Optimize costs by transitioning to serverless architectures.
+- Introduce predictive analytics for hiring trends using Amazon SageMaker.
+
+---
+
+### How to Replicate
+1. **Setup AWS Services**:
+   - Create S3 buckets for each dataset type.
+   - Configure AWS Glue for ETL processing.
+2. **Upload Datasets**:
+   - Partition datasets by ingestion year and month.
+3. **Run ETL Processes**:
+   - Use Glue jobs to clean, transform, and analyze data.
+4. **Query Results**:
+   - Execute queries in Amazon Athena for derived metrics.
+
+---
+
+### License
+This project is licensed under [MIT License](LICENSE).
+
+---
+
