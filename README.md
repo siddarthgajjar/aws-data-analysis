@@ -175,7 +175,7 @@ These measures ensure that the data used in the analysis is protected against un
 
 ---
 
-### Results
+#### Results
 - **Key Findings**:
   - Major bikeway growth in 2008 and 1998.
   - Shift from expansion to maintenance in recent years.
@@ -185,7 +185,7 @@ These measures ensure that the data used in the analysis is protected against un
 
 ---
 
-### Future Improvements
+#### Future Improvements
 - Implement IAM policies for finer access control.
 - Enable auto-scaling for increased reliability.
 - Optimize costs using Reserved Instances.
@@ -194,7 +194,7 @@ These measures ensure that the data used in the analysis is protected against un
 
 ---
 
-### How to Replicate
+#### How to Replicate
 1. **Setup AWS Services**:
    - Create S3 buckets for raw and transformed data.
    - Configure AWS Glue jobs for ETL processes.
