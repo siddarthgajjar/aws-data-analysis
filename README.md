@@ -24,7 +24,6 @@ This project demonstrates the design and implementation of an end-to-end data an
 - [Results](#results)
 - [Future Improvements](#future-improvements)
 - [How to Replicate](#how-to-replicate)
-- [License](#license)
 
 ---
 
@@ -232,7 +231,6 @@ This project focuses on analyzing recruitment and selection data to improve hiri
 - [Results](#results)
 - [Future Improvements](#future-improvements)
 - [How to Replicate](#how-to-replicate)
-- [License](#license)
 
 ---
 
