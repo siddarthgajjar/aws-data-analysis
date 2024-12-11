@@ -419,11 +419,3 @@ This project leveraged the following AWS services:
    - Use Glue jobs to clean, transform, and analyze data.
 4. **Query Results**:
    - Execute queries in Amazon Athena for derived metrics.
-
----
-
-### License
-This project is licensed under [MIT License](LICENSE).
-
----
-
